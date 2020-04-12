@@ -1,0 +1,116 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# group: !include groups.yaml
+# automation: !include automations.yaml
+# script: !include scripts.yaml
+# scene: !include scenes.yaml
+
+mqtt:
+  broker: 192.168.1.100
+
+sensor:
+  - platform: mqtt
+    name: "temp_1"
+    state_topic: "temp_1"
+    unit_of_measurement: "°C"
+  - platform: mqtt
+    name: "hum_1"
+    state_topic: "hum_1"
+    unit_of_measurement: "%"
+  - platform: mqtt
+    name: "temp_2"
+    state_topic: "temp_2"
+    unit_of_measurement: "°C"
+  - platform: mqtt
+    name: "hum_2"
+    state_topic: "hum_2"
+    unit_of_measurement: "%"
+  - platform: mqtt
+    name: "temp_3"
+    state_topic: "temp_3"
+    unit_of_measurement: "°C"
+  - platform: mqtt
+    name: "hum_3"
+    state_topic: "hum_3"
+    unit_of_measurement: "%"
+  - platform: mqtt
+    name: "temp_4"
+    state_topic: "temp_4"
+    unit_of_measurement: "°C"
+  - platform: mqtt
+    name: "hum_4"
+    state_topic: "hum_4"
+    unit_of_measurement: "%"
+  - platform: mqtt
+    name: "batt_4"
+    state_topic: "batt_4"
+    unit_of_measurement: "-"
+  - platform: template
+    sensors:
+      zimmeroben:
+        friendly_name_template: >-
+          {% if states.sensor.temp_1.state | int < 19 %}
+            Zimmer oben - alles gut.
+          {% else %}
+            Zimer oben - gut warm.
+          {% endif %}
+        value_template: >-
+          {{states.sensor.temp_1.state}}°C / {{states.sensor.hum_1.state}}%
+        icon_template: >-
+          mdi:window-open
+  - platform: template
+    sensors:
+      wohnzimmer:
+        friendly_name_template: >-
+          {% if states.sensor.temp_2.state | int > 0 %}
+            Wohnzimmer - alles gut.
+          {% endif %}
+        value_template: >-
+          {{states.sensor.temp_2.state}}°C / {{states.sensor.hum_2.state}}%
+        icon_template: >-
+          mdi:window-open
+  - platform: template
+    sensors:
+      gaestezimmer:
+        friendly_name_template: >-
+          {% if states.sensor.temp_3.state | int > 0 %}
+            Gästezimmer - alles gut.
+          {% endif %}
+        value_template: >-
+          {{states.sensor.temp_3.state}}°C / {{states.sensor.hum_3.state}}%
+        icon_template: >-
+          mdi:window-open
+  - platform: template
+    sensors:
+      bad:
+        friendly_name_template: >-
+          {% if states.sensor.temp_4.state | int > 0 %}
+            Bad - alles gut.
+          {% endif %}
+        value_template: >-
+          {{states.sensor.temp_4.state}}°C / {{states.sensor.hum_4.state}}% / {{states.sensor.batt_4.state}}-
+        icon_template: >-
+          mdi:window-open
+
+automation:
+  - id: zimmer_oben_alarm
+    alias: 'Zimmer Oben Alarm'
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.temp_1
+      above: 19
+    action:
+      service: notify.mobile_app_sm_a405fn
+      data:
+        title: 'Zimmer oben'
+        message: 'Achtung: Temperatur über 19°C'

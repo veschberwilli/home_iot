@@ -1,0 +1,55 @@
+title: Daheim
+views:
+  - badges: []
+    cards:
+      - entities:
+          - entity: sensor.gaestezimmer
+          - entity: sensor.wohnzimmer
+          - entity: sensor.zimmeroben
+        type: entities
+      - entity: sensor.hum_1
+        max: 100
+        min: 30
+        name: Zimmer oben
+        severity:
+          green: 0
+          red: 100
+          yellow: 70
+        theme: default
+        type: gauge
+      - entity: sensor.hum_2
+        max: 100
+        min: 30
+        name: Wohnzimmer
+        severity:
+          green: 0
+          red: 100
+          yellow: 70
+        theme: default
+        type: gauge
+      - entity: sensor.hum_3
+        max: 100
+        min: 30
+        name: Gästezimmer
+        severity:
+          green: 0
+          red: 100
+          yellow: 70
+        theme: default
+        type: gauge
+      - entities:
+          - entity: sensor.hum_1
+          - entity: sensor.hum_2
+          - entity: sensor.hum_3
+          - entity: sensor.hum_4
+          - entity: sensor.temp_1
+          - entity: sensor.temp_2
+          - entity: sensor.temp_3
+          - entity: sensor.temp_4
+        hours_to_show: 24
+        refresh_interval: 0
+        type: history-graph
+      - entity: weather.daheim
+        type: weather-forecast
+    title: Daheim
+
