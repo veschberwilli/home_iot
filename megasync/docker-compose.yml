@@ -1,19 +1,14 @@
 version: '3'
 
 services:
-  megasync_base:
+  sync2018:
     build: .
     image: megasync:latest
-
-  sync_2018:
-    depends_on:
-      - megasync_base
-    image:
-      - megasync:latest
+    tty: true
     volumes:
       - ./test_sync:/tmp
     environment:
-      - ENV MEGA_EMAIL=veschberwilli678@gmx.de
-      - ENV MEGA_PWD=Joris2016
-      - ENV REMOTE_FOLDER=2018/a
-      - ENV LOCAL_FOLDER=/tmp
+      - MEGA_EMAIL=veschberwilli678@gmx.de
+      - MEGA_PWD=Joris2016
+      - REMOTE_FOLDER=2018/a
+      - LOCAL_FOLDER=/tmp

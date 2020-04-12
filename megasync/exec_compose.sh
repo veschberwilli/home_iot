@@ -1,4 +1,3 @@
 # Usage: megasimplesync [local folder] [remote folder]
-# RUN megasimplesync /tmp $REMOTE_FOLDER
 
-docker-compose exec sync_2018 "/bin/sh megasimplesync $LOCAL_FOLDER $REMOTE_FOLDER"
+docker exec megasync_sync2018_1 sh -c 'megasimplesync $LOCAL_FOLDER $REMOTE_FOLDER'
