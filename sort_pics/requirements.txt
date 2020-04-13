@@ -1,2 +1,1 @@
-exiftool
-glob
+PyExifTool==0.1.1

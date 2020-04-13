@@ -16,11 +16,11 @@ import exiftool
 import glob
 
 # predefined variables
-dir_data_unsorted = '/media/pi/egon/data_all_unsorted/'
-dir_data_sorted= '/media/pi/egon/data_sorted/'
+dir_data_unsorted = './unsorted/'
+dir_data_sorted= './sorted/'
 folder_unknown_date = 'unknown_date'
 daily_folder_suffix = '_dummy'
-exif_Executable = '/usr/bin/exiftool'
+exif_Executable = '/usr/local/bin/exiftool'
 exif_key_create_date = ':CreateDate'
 pic_file_type = ('jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG')
 vid_file_type = ('mp4', 'MP4', 'avi', 'AVI', 'MTS', 'MOV')
