@@ -3,14 +3,15 @@ views:
   - badges: []
     cards:
       - entities:
-          - entity: sensor.gaestezimmer
+          - entity: sensor.waschkeller
           - entity: sensor.wohnzimmer
-          - entity: sensor.zimmeroben
+          - entity: sensor.heizraum
+          - entity: sensor.bad
         type: entities
       - entity: sensor.hum_1
         max: 100
         min: 30
-        name: Zimmer oben
+        name: Heizraum
         severity:
           green: 0
           red: 100
@@ -30,7 +31,17 @@ views:
       - entity: sensor.hum_3
         max: 100
         min: 30
-        name: Gästezimmer
+        name: Waschkeller
+        severity:
+          green: 0
+          red: 100
+          yellow: 70
+        theme: default
+        type: gauge
+      - entity: sensor.hum_4
+        max: 100
+        min: 30
+        name: Bad
         severity:
           green: 0
           red: 100

@@ -57,12 +57,12 @@ sensor:
     unit_of_measurement: "-"
   - platform: template
     sensors:
-      zimmeroben:
+      heizraum:
         friendly_name_template: >-
-          {% if states.sensor.temp_1.state | int < 19 %}
-            Zimmer oben - alles gut.
+          {% if states.sensor.hum_1.state | int < 75 %}
+            Heizraum - alles gut.
           {% else %}
-            Zimer oben - gut warm.
+            Heizraum - bitte lüften.
           {% endif %}
         value_template: >-
           {{states.sensor.temp_1.state}}°C / {{states.sensor.hum_1.state}}%
@@ -72,8 +72,10 @@ sensor:
     sensors:
       wohnzimmer:
         friendly_name_template: >-
-          {% if states.sensor.temp_2.state | int > 0 %}
+          {% if states.sensor.hum_2.state | int < 75 %}
             Wohnzimmer - alles gut.
+          {% else %}
+            Wohnzimmer - bitte lüften.
           {% endif %}
         value_template: >-
           {{states.sensor.temp_2.state}}°C / {{states.sensor.hum_2.state}}%
@@ -81,10 +83,12 @@ sensor:
           mdi:window-open
   - platform: template
     sensors:
-      gaestezimmer:
+      waschkeller:
         friendly_name_template: >-
-          {% if states.sensor.temp_3.state | int > 0 %}
-            Gästezimmer - alles gut.
+          {% if states.sensor.hum_3.state | int > 75 %}
+            Waschkeller - alles gut.
+          {% else %}
+            Waschkeller - bitte lüften.
           {% endif %}
         value_template: >-
           {{states.sensor.temp_3.state}}°C / {{states.sensor.hum_3.state}}%
@@ -94,8 +98,10 @@ sensor:
     sensors:
       bad:
         friendly_name_template: >-
-          {% if states.sensor.temp_4.state | int > 0 %}
+          {% if states.sensor.hum_4.state | int > 75 %}
             Bad - alles gut.
+          {% else %}
+            Bad - bitte lüften.
           {% endif %}
         value_template: >-
           {{states.sensor.temp_4.state}}°C / {{states.sensor.hum_4.state}}% / {{states.sensor.batt_4.state}}-
@@ -103,14 +109,48 @@ sensor:
           mdi:window-open
 
 automation:
-  - id: zimmer_oben_alarm
-    alias: 'Zimmer Oben Alarm'
+  - id: heizraum_alarm
+    alias: 'Heizraum Alarm'
     trigger:
       platform: numeric_state
-      entity_id: sensor.temp_1
-      above: 19
+      entity_id: sensor.hum_1
+      above: 75
     action:
       service: notify.mobile_app_sm_a405fn
       data:
-        title: 'Zimmer oben'
-        message: 'Achtung: Temperatur über 19°C'
+        title: 'Heizraum'
+        message: 'Achtung: Rel Luftfeuchte über 75%'
+  - id: wohnzimmer_alarm
+    alias: 'Wohnzimmer Alarm'
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.hum_2
+      above: 75
+    action:
+      service: notify.mobile_app_sm_a405fn
+      data:
+        title: 'Wohnzimmer'
+        message: 'Achtung: Rel Luftfeuchte über 75%'
+  - id: waschkeller_alarm
+    alias: 'Waschkeller Alarm'
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.hum_3
+      above: 75
+    action:
+      service: notify.mobile_app_sm_a405fn
+      data:
+        title: 'Waschkeller'
+        message: 'Achtung: Rel Luftfeuchte über 75%'
+  - id: bad_alarm
+    alias: 'Bad Alarm'
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.hum_4
+      above: 75
+    action:
+      service: notify.mobile_app_sm_a405fn
+      data:
+        title: 'Bad'
+        message: 'Achtung: Rel Luftfeuchte über 75%'
+
