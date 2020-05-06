@@ -85,7 +85,7 @@ sensor:
     sensors:
       waschkeller:
         friendly_name_template: >-
-          {% if states.sensor.hum_3.state | int > 75 %}
+          {% if states.sensor.hum_3.state | int < 75 %}
             Waschkeller - alles gut.
           {% else %}
             Waschkeller - bitte lüften.
@@ -98,7 +98,7 @@ sensor:
     sensors:
       bad:
         friendly_name_template: >-
-          {% if states.sensor.hum_4.state | int > 75 %}
+          {% if states.sensor.hum_4.state | int < 75 %}
             Bad - alles gut.
           {% else %}
             Bad - bitte lüften.
