@@ -3,7 +3,7 @@ services:
   home-assisstant:
     image: homeassistant/raspberrypi3-homeassistant:stable
     volumes:
-      - /home/pi/minikube/home_iot/home_assisstant:/config
+      - /home/pi/home_assisstant:/config
     network_mode: host
     environment:
       TZ: 'Europe/Berlin'
