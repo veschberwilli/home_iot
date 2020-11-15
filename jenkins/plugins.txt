@@ -1,0 +1,6 @@
+workflow-aggregator:2.6
+pipeline-model-definition:1.7.2
+workflow-multibranch:2.22
+workflow-basic-steps:2.23
+branch-api:2.6.3
+fstrigger:0.40
