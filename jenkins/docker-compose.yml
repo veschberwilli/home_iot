@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  python:
+    image: python:latest
+
+  jenkins:
+    build: .
+    depends_on:
+      - python
+    volumes:
+      - /home/egon/jenkins/:/var/jenkins_home
+      - /home/egon/repos/home_iot/datarchiver/sort_pics/:/mnt/sort_pics
+      - /home/egon/pics/:/mnt/pics
+    ports:
+      - "8080:8080"
+      - "50000:50000"
