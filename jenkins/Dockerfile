@@ -24,6 +24,19 @@ RUN apt-get install -y \
 	wget
 
 RUN apt-get install -y python3
-#RUN apt-get install -y pip3
+RUN apt-get install -y python3-pip
 
-#RUN pip3 install yaml
+RUN pip3 install pyexiftool
+RUN pip3 install pyyaml
+
+# install exiftool
+RUN mkdir /exiftool
+COPY Image-ExifTool-11.93.tar.gz /exiftool
+WORKDIR /exiftool
+RUN gzip -dc Image-ExifTool-11.93.tar.gz | tar -xf -
+WORKDIR /exiftool/Image-ExifTool-11.93
+RUN perl Makefile.PL
+#RUN make test
+RUN make install
+
+WORKDIR /mnt/sort_pics

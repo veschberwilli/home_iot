@@ -2,8 +2,8 @@
 # path settings
 # -----------------------------------------------
 path_settings:
-  dir_data_unsorted: /media/pi/egon/data_unsorted/
-  dir_data_sorted: /media/pi/egon/data_sorted/
+  dir_data_unsorted: /mnt/pics/unsorted/
+  dir_data_sorted: /mnt/pics/sorted/
   exif_Executable: /usr/local/bin/exiftool
 
 # -----------------------------------------------
