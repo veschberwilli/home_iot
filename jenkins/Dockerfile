@@ -2,41 +2,38 @@ FROM jenkins/jenkins:latest
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
-#USER root
+USER root
 
-#RUN apt-get update -y && \
-#	apt-get upgrade -y
+# https://docs.docker.com/engine/install/ubuntu/
+RUN apt-get -y update
+RUN apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable"
+RUN apt-get update
+RUN apt-get -y install docker-ce docker-ce-cli containerd.io
+#RUN curl -L “https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)” -o /usr/local/bin/docker-compose && \
+# chmod +x /usr/local/bin/docker-compose && \
+# ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+#USER jenkins
 
-#RUN apt-get install -y \
-#	build-essential \
-#	libssl-dev \
-#	zlib1g-dev \
-#	libncurses5-dev \
-#	libncursesw5-dev \
-#	libreadline-dev \
-#	libsqlite3-dev \
-#	libgdbm-dev \
-#	libdb5.3-dev \
-#	libbz2-dev \
-#	libexpat1-dev \
-#	liblzma-dev \
-#	tk-dev \
-#	wget
-
-#RUN apt-get install -y python3
-#RUN apt-get install -y python3-pip
-
-#RUN pip3 install pyexiftool
-#RUN pip3 install pyyaml
-
-# install exiftool
-#RUN mkdir /exiftool
-#COPY Image-ExifTool-11.93.tar.gz /exiftool
-#WORKDIR /exiftool
-#RUN gzip -dc Image-ExifTool-11.93.tar.gz | tar -xf -
-#WORKDIR /exiftool/Image-ExifTool-11.93
-#RUN perl Makefile.PL
-#RUN make test
-#RUN make install
-
-#WORKDIR /mnt/sort_pics
+#RUN apt-get -y update && \
+# apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common && \
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+# add-apt-repository \
+# “deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo “$ID”) \
+# $(lsb_release -cs) \
+# stable” && \
+# apt-get update && \
+# apt-get -y install docker-ce docker-ce-cli containerd.io
+#RUN curl -L “https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)” -o /usr/local/bin/docker-compose && \
+# chmod +x /usr/local/bin/docker-compose && \
+# ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+#USER jenkins

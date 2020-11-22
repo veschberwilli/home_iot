@@ -4,3 +4,6 @@ workflow-multibranch:2.22
 workflow-basic-steps:2.23
 branch-api:2.6.3
 fstrigger:0.40
+docker-plugin:1.2.1
+github:1.32.0
+docker-workflow:1.25
