@@ -54,7 +54,8 @@ class SortData:
 
         # read config file
         try:
-            with open('config.yaml', 'r') as config_file:
+            path_to_yaml = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.yaml')
+            with open(path_to_yaml, 'r') as config_file:
                 self.config = yaml.load(config_file, Loader=yaml.FullLoader)
         except IOError:
             raise Exception('config file reading error.')
