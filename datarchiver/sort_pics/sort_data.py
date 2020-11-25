@@ -1,13 +1,7 @@
 
 ####################################################################
 # script to import data from different sources into defined structure
-
 # Author: Michael Mink
-# Date: 11/2019
-
-# Dependencies:
-# - exiftool
-
 ####################################################################
 
 # import packages
@@ -96,8 +90,10 @@ class SortData:
                     file_type = file.split('.')[-1]
                     create_date_obj = create_date()
 
-                    # debug output
-                    # logging.info('processing file: %s' % (file_path))
+                    # update Comment Tag with Name
+                    for originator in self.config['originator_names']:
+                        if originator in path:
+                            _ = os.system("""exiftool -Comment="%s" -overwrite_original_in_place %s""" % (originator, file_path))
 
                     # read exif header
                     with exiftool.ExifTool() as et:
