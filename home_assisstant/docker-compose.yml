@@ -9,9 +9,10 @@ services:
       TZ: 'Europe/Berlin'
   mqtt-broker:
     image: eclipse-mosquitto
-    network_mode: host
     ports:
       - 1883:1883
       - 9001:9001
     volumes:
-      - /mosquitto/log
+      - /home/pi/mosquitto/log:/mosquitto/log
+      - /home/pi/mosquitto/config:/mosquitto/config/mosquitto.config
+      - /home/pi/mosquitto/data:/mosquitto/data

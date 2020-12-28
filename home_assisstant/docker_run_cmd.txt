@@ -1,1 +1,0 @@
-sudo docker run --init -d --name="home-assisstant" -e "TZ=Europe/Berlin" -v /home/pi/minikube/hass/:/config --net=host homeassistant/home-assistant
