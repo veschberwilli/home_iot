@@ -2,6 +2,7 @@ version: '3'
 services:
   home-assisstant:
     image: homeassistant/raspberrypi3-homeassistant:stable
+    restart: always
     volumes:
       - /home/pi/home_assisstant:/config
     network_mode: host
@@ -9,6 +10,7 @@ services:
       TZ: 'Europe/Berlin'
   mqtt-broker:
     image: eclipse-mosquitto
+    restart: always
     ports:
       - 1883:1883
       - 9001:9001
