@@ -13,7 +13,7 @@ import gc
 gc.collect()
 
 ssid = 'Du-kommst-hier-nicht-rein'
-password = 'Joris2016'
+password = 'xxx'
 mqtt_server = '192.168.68.222'
 
 client_id = ubinascii.hexlify(machine.unique_id())
