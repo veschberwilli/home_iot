@@ -2,9 +2,10 @@
 # path settings
 # -----------------------------------------------
 path_settings:
-  dir_data_unsorted: /media/pi/egon/data_unsorted/
-  dir_data_sorted: /media/pi/egon/data_sorted/
-  exif_Executable: /usr/local/bin/exiftool
+  dir_data_unsorted: /mnt/pics/unsorted/
+  dir_data_sorted: /mnt/pics/sorted/
+  #dir_data_unsorted: /home/egon/pics/unsorted
+  #dir_data_sorted: /home/egon/pics/sorted
 
 # -----------------------------------------------
 # data formats
@@ -29,3 +30,6 @@ vid_file_type:
 # -----------------------------------------------
 exif_key_create_date: :CreateDate
 daily_folder_suffix: _dummy
+originator_names:
+  - Janine
+  - Michi

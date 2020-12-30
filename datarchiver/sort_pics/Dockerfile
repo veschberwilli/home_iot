@@ -1,6 +1,6 @@
 FROM python:3
 
-RUN apt-get update && apt-get install -y cron
+RUN apt-get upgrade && apt-get update -y
 
 WORKDIR /usr/src/app
 
@@ -9,10 +9,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 # setup cronjob
-COPY ./crontab_sort /etc/cron.d/crontab_sort
-RUN chmod 0644 /etc/cron.d/crontab_sort
-RUN crontab /etc/cron.d/crontab_sort
-RUN touch ./cron.log
+#COPY ./crontab_sort /etc/cron.d/crontab_sort
+#RUN chmod 0644 /etc/cron.d/crontab_sort
+#RUN crontab /etc/cron.d/crontab_sort
+#RUN touch ./cron.log
 
 # install exiftool
 RUN gzip -dc Image-ExifTool-11.93.tar.gz | tar -xf -

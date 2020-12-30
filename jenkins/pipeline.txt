@@ -1,0 +1,32 @@
+pipeline {
+    agent { docker { image 'python3:latest' } }
+    stages {
+        stage('list unsorted pics') {
+            steps {
+                sh 'ls -l /mnt/pics/unsorted/Michi'
+            }
+        }
+        stage('list sorted pics'){
+            steps {
+                sh 'ls -l /mnt/pics/sorted/2020'
+            }
+        }
+        stage('run sort tool') {
+            steps {
+                dir('/mnt/sort_pics'){
+                    sh 'python sort_data.py'
+                }
+            }
+        }
+        stage('list unsorted pics again') {
+            steps {
+                sh 'ls -l /mnt/pics/unsorted/Michi'
+            }
+        }
+        stage('list sorted_again'){
+            steps {
+                sh 'ls -l /mnt/pics/sorted/2020'
+            }
+        }
+    }
+}

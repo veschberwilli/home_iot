@@ -1,13 +1,7 @@
 
 ####################################################################
 # script to import data from different sources into defined structure
-
 # Author: Michael Mink
-# Date: 11/2019
-
-# Dependencies:
-# - exiftool
-
 ####################################################################
 
 # import packages
@@ -54,7 +48,8 @@ class SortData:
 
         # read config file
         try:
-            with open('config.yaml', 'r') as config_file:
+            path_to_yaml = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.yaml')
+            with open(path_to_yaml, 'r') as config_file:
                 self.config = yaml.load(config_file, Loader=yaml.FullLoader)
         except IOError:
             raise Exception('config file reading error.')
@@ -95,8 +90,10 @@ class SortData:
                     file_type = file.split('.')[-1]
                     create_date_obj = create_date()
 
-                    # debug output
-                    # logging.info('processing file: %s' % (file_path))
+                    # update Comment Tag with Name
+                    for originator in self.config['originator_names']:
+                        if originator in path:
+                            _ = os.system("""exiftool -Comment="%s" -overwrite_original_in_place %s""" % (originator, file_path))
 
                     # read exif header
                     with exiftool.ExifTool() as et:
