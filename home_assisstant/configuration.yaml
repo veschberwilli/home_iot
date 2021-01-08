@@ -18,6 +18,15 @@ tts:
 mqtt:
   broker: 192.168.68.222
 
+switch:
+  - platform: mqtt
+    unique_id: relais_switch
+    name: "Relais Switch"
+    command_topic: "relais"
+    payload_on: "on"
+    payload_off: "off"
+    qos: 0
+
 sensor:
   - platform: mqtt
     name: "temp_1"

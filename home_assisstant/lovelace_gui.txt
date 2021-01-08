@@ -54,17 +54,14 @@ views:
         hours_to_show: 24
         refresh_interval: 0
         type: history-graph
-  - title: TMP
+  - title: Schalter
     path: tmp
     theme: ''
     badges: []
     cards:
       - type: button
-        tap_action:
-          action: call-service
-          service: notify.mobile_app_meins
-        entity: device_tracker.meins
+        entity: switch.relais_switch
         show_state: true
-        name: Anschalten
+        name: Relais Switch
         show_icon: true
-
+        icon: 'hass:lightbulb-on-outline'
