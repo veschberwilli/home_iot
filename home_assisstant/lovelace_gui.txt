@@ -60,8 +60,38 @@ views:
     badges: []
     cards:
       - type: button
-        entity: switch.relais_switch
+        tap_action:
+          action: toggle
+        entity: switch.tp_link_smart_plug_8f08
+        name: Leuchtkiste
         show_state: true
-        name: Relais Switch
-        show_icon: true
-        icon: 'hass:lightbulb-on-outline'
+        icon: 'hass:lightbulb'
+  - title: Stromverbrauch
+    path: bilder
+    badges: []
+    cards:
+      - type: gauge
+        entity: sensor.waschmaschine_power_w
+        min: 0
+        name: Aktueller Vebrauch
+        unit: Watt
+        max: 100
+      - type: history-graph
+        entities:
+          - entity: sensor.waschmaschine_today_kwh
+          - entity: sensor.waschmaschine_total_kwh
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Verbrauch
+      - type: history-graph
+        entities:
+          - entity: sensor.waschmaschine_amps
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Strom
+      - type: history-graph
+        entities:
+          - entity: sensor.waschmaschine_volts
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Spannung

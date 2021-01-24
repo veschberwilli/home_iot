@@ -16,7 +16,7 @@ tts:
 # scene: !include scenes.yaml
 
 mqtt:
-  broker: 192.168.68.222
+  broker: 192.168.1.222
 
 switch:
   - platform: mqtt
@@ -27,7 +27,34 @@ switch:
     payload_off: "off"
     qos: 0
 
+tplink:
+  switch:
+    - host: 192.168.1.106
+    - host: 192.168.1.104
+
 sensor:
+  - platform: template
+    sensors:
+      waschmaschine_amps:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Strom"
+        value_template: '{{ states.switch.stecker_strom.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      waschmaschine_power_w:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Aktueller Verbrauch"
+        value_template: '{{ states.switch.stecker_strom.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      waschmaschine_total_kwh:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Bisheriger Verbrauch"
+        value_template: '{{ states.switch.stecker_strom.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      waschmaschine_volts:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Spannung"
+        value_template: '{{ states.switch.stecker_strom.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+      waschmaschine_today_kwh:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Heutiger Verbrauch"
+        value_template: '{{ states.switch.stecker_strom.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
   - platform: mqtt
     name: "temp_1"
     state_topic: "temp_1"
