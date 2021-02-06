@@ -1,0 +1,5 @@
+/lhome/micmink/Tools/home_iot/cpp_stuff/build/CMakeFiles/rebuild_cache.dir
+/lhome/micmink/Tools/home_iot/cpp_stuff/build/CMakeFiles/edit_cache.dir
+/lhome/micmink/Tools/home_iot/cpp_stuff/build/CMakeFiles/exif_header_checker.dir
+/lhome/micmink/Tools/home_iot/cpp_stuff/build/CMakeFiles/package_source.dir
+/lhome/micmink/Tools/home_iot/cpp_stuff/build/CMakeFiles/package.dir

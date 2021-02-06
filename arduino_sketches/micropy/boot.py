@@ -18,7 +18,7 @@ p0 = Pin(4, Pin.OUT)
 
 ssid = 'Du-kommst-hier-nicht-rein'
 password = 'xxx'
-mqtt_server = '192.168.68.222'
+mqtt_server = '192.168.1.222'
 
 client_id = ubinascii.hexlify(machine.unique_id())
 topic_sub = 'relais'
