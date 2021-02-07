@@ -70,12 +70,15 @@ int main(int argc, char *argv[]) {
 
                 //char tmp[] entry.path().filename().c_str();
 
+                
                 // exiftool
                 ExifTool *et = new ExifTool();
+                
                 // read metadata from the image
                 TagInfo *info = et->ImageInfo(entry.path().c_str());
                 if (info) 
                 {
+                    cout << info->["CreateData"] << endl;
                     // print returned information
                     for (TagInfo *i=info; i; i=i->next) 
                     {
@@ -84,7 +87,6 @@ int main(int argc, char *argv[]) {
                     // we are responsible for deleting the information when done
                     delete info;
                 }
-                
             }
         }
     }
