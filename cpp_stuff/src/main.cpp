@@ -1,12 +1,14 @@
 // This is my first cpp stuff
 
 
-
+#include <stdio.h>
 #include <iostream>
 #include <vector>
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
 #include "ExifTool.h"
+#include <map>
+#include "Table.h"
 
 
 using namespace std;
@@ -19,9 +21,8 @@ po::variables_map getProgramOptions(const int argc, const char* const* argv) {
 
     program_options.add_options()
         ("help,h", "Display the help message.")
-        ("name,n", po::value<string>()->default_value("na"), "Select Name to Search For.")
-        ("dir,d", po::value<string>()->default_value("../pics"), "Select Directory to Search In.")
-        ("recursive,r", po::value<bool>()->default_value("True"), "Search Recursive.");
+        ("name,n", po::value<string>()->default_value("250"), "Select Name to Search For.")
+        ("dir,d", po::value<string>()->default_value("../pics"), "Select Directory to Search In.");
     
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, program_options), vm);
@@ -41,6 +42,7 @@ void printHeader(){
     cout<<"+++++++++++++++++++++++"<<endl;
 }
 
+
 int main(int argc, char *argv[]) {
 
     // print header
@@ -52,11 +54,11 @@ int main(int argc, char *argv[]) {
     // print params
     cout << "Name:" << vm["name"].as<string>() << endl;
     cout << "Dir:" << vm["dir"].as<string>() << endl;
-    cout << "Recursive:" << vm["recursive"].as<bool>() << "\n" << endl;
 
     // loop over files and extract exif info and store in array
     fs::path p = vm["dir"].as<string>();
     vector<string> white_list = {".jpg", ".png"};
+    Table tmp;
     
     if (fs::is_directory(p))
     {
@@ -64,26 +66,43 @@ int main(int argc, char *argv[]) {
         {
             if ((entry.path().has_extension()) && (find(white_list.begin(), white_list.end(), entry.path().filename()) == white_list.end()))
             {
-                cout << "Path: " << entry.path() << endl;
-                cout << "Filename: " << entry.path().filename().c_str() << endl;
-                cout << "Extension: " << entry.path().extension() << endl;
-
-                //char tmp[] entry.path().filename().c_str();
-
+                //cout << "Path: " << entry.path() << endl;
+                //cout << "Filename: " << entry.path().filename().c_str() << endl;
+                //cout << "Extension: " << entry.path().extension() << endl;
                 
                 // exiftool
                 ExifTool *et = new ExifTool();
+
+                string opt = "-CreateDate\n-ISO";
+                int nr = et->ExtractInfo(entry.path().c_str(), opt.c_str());
+                TagInfo *info = et->GetInfo(nr);
                 
-                // read metadata from the image
-                TagInfo *info = et->ImageInfo(entry.path().c_str());
+                string iso_tmp;
+                string create_date_tmp;
+
+                // read ALL metadata from the image into TagInfo Struct
+                //TagInfo *info = et->ImageInfo(entry.path().c_str());
+
                 if (info) 
                 {
-                    cout << info->["CreateData"] << endl;
                     // print returned information
                     for (TagInfo *i=info; i; i=i->next) 
                     {
-                        cout << i->name << " = " << i->value << endl;
+                        if (string(i->name) == "CreateDate"){
+                            cout << "Path:" << entry.path() << " --> " << i->name << " = " << i->value << endl;
+                            create_date_tmp = string(i->value);
+                        }
+                        if (string(i->name) == "ISO"){
+                            cout << "Path:" << entry.path() << " --> " << i->name << " = " << i->value << endl;
+                            iso_tmp = string(i->value);
+                        }
                     }
+                    // add to table
+                    if (iso_tmp == vm["name"].as<string>()){
+                        tmp.AddToTable(entry.path().c_str(), create_date_tmp);
+                    }
+                    
+
                     // we are responsible for deleting the information when done
                     delete info;
                 }
@@ -91,16 +110,18 @@ int main(int argc, char *argv[]) {
         }
     }
         
-        
-
     
-    
-
 
     // check array and report the oldest time stamp/file
+    tmp.PrintTable();
 
 
     
     return 0;
 
 }
+
+
+
+
+

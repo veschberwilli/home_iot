@@ -10,9 +10,13 @@ find_package(Boost COMPONENTS log program_options REQUIRED)
 include_directories( ${Boost_INCLUDE_DIRS} )
 include_directories(cpp_exiftool/inc)
 include_directories(cpp_exiftool/src)
+include_directories(src)
+include_directories(include)
 
 add_executable(exif_header_checker 
-    main.cpp 
+    src/main.cpp
+    include/Table.h
+    src/Table.cpp
     cpp_exiftool/inc/ExifTool.h
     cpp_exiftool/src/ExifTool.cpp
     cpp_exiftool/src/ExifToolPipe.cpp
