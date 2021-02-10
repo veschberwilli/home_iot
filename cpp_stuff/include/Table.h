@@ -5,7 +5,7 @@
 
 struct row {
         std::string timestamp_orig="";
-        int timestamp_int=0;
+        double timestamp_double=0;
         std::string filename="";
     };
 
@@ -14,6 +14,6 @@ class Table {
         std::vector<row> table_vec;
 
         void AddToTable(std::string filename, std::string timestamp);
-        void FindInTable();
+        void GetLatest();
         void PrintTable();
 };

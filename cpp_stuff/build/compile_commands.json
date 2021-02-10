@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/lhome/micmink/Tools/home_iot/cpp_stuff/build",
-  "command": "/usr/bin/c++   -O3 -DNDEBUG -o CMakeFiles/exif_header_checker.dir/main.cpp.o -c /lhome/micmink/Tools/home_iot/cpp_stuff/main.cpp",
-  "file": "/lhome/micmink/Tools/home_iot/cpp_stuff/main.cpp"
-}
-]

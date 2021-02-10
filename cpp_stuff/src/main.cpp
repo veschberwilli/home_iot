@@ -21,7 +21,7 @@ po::variables_map getProgramOptions(const int argc, const char* const* argv) {
 
     program_options.add_options()
         ("help,h", "Display the help message.")
-        ("name,n", po::value<string>()->default_value("250"), "Select Name to Search For.")
+        ("name,n", po::value<string>()->default_value("Janine"), "Select Name to Search For.")
         ("dir,d", po::value<string>()->default_value("../pics"), "Select Directory to Search In.");
     
     po::variables_map vm;
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
                 // exiftool
                 ExifTool *et = new ExifTool();
 
-                string opt = "-CreateDate\n-ISO";
+                string opt = "-CreateDate\n-Comment";
                 int nr = et->ExtractInfo(entry.path().c_str(), opt.c_str());
                 TagInfo *info = et->GetInfo(nr);
                 
@@ -89,11 +89,11 @@ int main(int argc, char *argv[]) {
                     for (TagInfo *i=info; i; i=i->next) 
                     {
                         if (string(i->name) == "CreateDate"){
-                            cout << "Path:" << entry.path() << " --> " << i->name << " = " << i->value << endl;
+                            //cout << "Path:" << entry.path() << " --> " << i->name << " = " << i->value << endl;
                             create_date_tmp = string(i->value);
                         }
-                        if (string(i->name) == "ISO"){
-                            cout << "Path:" << entry.path() << " --> " << i->name << " = " << i->value << endl;
+                        if (string(i->name) == "Comment"){
+                            //cout << "Path:" << entry.path() << " --> " << i->name << " = " << i->value << endl;
                             iso_tmp = string(i->value);
                         }
                     }
@@ -110,18 +110,11 @@ int main(int argc, char *argv[]) {
         }
     }
         
-    
+    // print files with resp. tag in table form
+    // tmp.PrintTable();
 
-    // check array and report the oldest time stamp/file
-    tmp.PrintTable();
-
-
+    // get the latest file
+    tmp.GetLatest();
     
     return 0;
-
 }
-
-
-
-
-
