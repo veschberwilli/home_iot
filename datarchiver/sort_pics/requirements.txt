@@ -1,2 +1,2 @@
 PyExifTool==0.1.1
-PyYaml==5.3.1
+PyYaml==5.4
