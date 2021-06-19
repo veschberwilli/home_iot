@@ -126,8 +126,6 @@ for i in range(len(message_lines)):
     print('P:', message_lines[i])
     print('C:', cipher_lines[i])
 
-
-
 for c in attack.mappings:
     print(c, attack.mappings[c])
 
