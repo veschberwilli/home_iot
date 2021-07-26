@@ -1,17 +1,17 @@
 title: Daheim
 views:
-  - badges: []
+  - title: Temperaturen
+    badges: []
     cards:
       - entities:
           - entity: sensor.waschkeller
           - entity: sensor.wohnzimmer
           - entity: sensor.heizraum
-          - entity: sensor.bad
         type: entities
       - entity: sensor.hum_1
         max: 100
         min: 30
-        name: Heizraum
+        name: Waschkeller
         severity:
           green: 0
           red: 100
@@ -31,17 +31,7 @@ views:
       - entity: sensor.hum_3
         max: 100
         min: 30
-        name: Waschkeller
-        severity:
-          green: 0
-          red: 100
-          yellow: 70
-        theme: default
-        type: gauge
-      - entity: sensor.hum_4
-        max: 100
-        min: 30
-        name: Bad
+        name: Heizraum
         severity:
           green: 0
           red: 100
@@ -50,17 +40,58 @@ views:
         type: gauge
       - entities:
           - entity: sensor.hum_1
+            name: Waschkeller
           - entity: sensor.hum_2
+            name: Wohnzimmer
           - entity: sensor.hum_3
-          - entity: sensor.hum_4
+            name: Heizraum
           - entity: sensor.temp_1
+            name: Waschkeller
           - entity: sensor.temp_2
+            name: Wohnzimmer
           - entity: sensor.temp_3
-          - entity: sensor.temp_4
+            name: Heizraum
         hours_to_show: 24
         refresh_interval: 0
         type: history-graph
-      - entity: weather.daheim
-        type: weather-forecast
-    title: Daheim
-
+  - title: Schalter
+    path: tmp
+    theme: ''
+    badges: []
+    cards:
+      - type: button
+        tap_action:
+          action: toggle
+        entity: switch.tp_link_smart_plug_8f08
+        name: Leuchtkiste
+        show_state: true
+        icon: 'hass:lightbulb'
+  - title: Stromverbrauch
+    path: bilder
+    badges: []
+    cards:
+      - type: gauge
+        entity: sensor.waschmaschine_power_w
+        min: 0
+        name: Aktueller Vebrauch
+        unit: Watt
+        max: 100
+      - type: history-graph
+        entities:
+          - entity: sensor.waschmaschine_today_kwh
+          - entity: sensor.waschmaschine_total_kwh
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Verbrauch
+      - type: history-graph
+        entities:
+          - entity: sensor.waschmaschine_amps
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Strom
+      - type: history-graph
+        entities:
+          - entity: sensor.waschmaschine_volts
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Spannung

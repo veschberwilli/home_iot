@@ -18,7 +18,7 @@ ds_pin = Pin(22)
 ds_sensor = ds18x20.DS18X20(onewire.OneWire(ds_pin))
 
 ssid = 'Du-kommst-hier-nicht-rein'
-password = 'Joris2016'
+password = 'xxx'
 
 station = network.WLAN(network.STA_IF)
 

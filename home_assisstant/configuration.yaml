@@ -16,9 +16,45 @@ tts:
 # scene: !include scenes.yaml
 
 mqtt:
-  broker: 192.168.1.100
+  broker: 192.168.1.222
+
+switch:
+  - platform: mqtt
+    unique_id: relais_switch
+    name: "Relais Switch"
+    command_topic: "relais"
+    payload_on: "on"
+    payload_off: "off"
+    qos: 0
+
+tplink:
+  switch:
+    - host: 192.168.1.106
+    - host: 192.168.1.104
 
 sensor:
+  - platform: template
+    sensors:
+      waschmaschine_amps:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Strom"
+        value_template: '{{ states.switch.stecker_strom.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      waschmaschine_power_w:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Aktueller Verbrauch"
+        value_template: '{{ states.switch.stecker_strom.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      waschmaschine_total_kwh:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Bisheriger Verbrauch"
+        value_template: '{{ states.switch.stecker_strom.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      waschmaschine_volts:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Spannung"
+        value_template: '{{ states.switch.stecker_strom.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+      waschmaschine_today_kwh:
+        friendly_name_template: "{{ states.switch.stecker_strom.name}} Heutiger Verbrauch"
+        value_template: '{{ states.switch.stecker_strom.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
   - platform: mqtt
     name: "temp_1"
     state_topic: "temp_1"
@@ -57,12 +93,12 @@ sensor:
     unit_of_measurement: "-"
   - platform: template
     sensors:
-      heizraum:
+      waschkeller:
         friendly_name_template: >-
           {% if states.sensor.hum_1.state | int < 75 %}
-            Heizraum - alles gut.
+            Waschkeller - alles gut.
           {% else %}
-            Heizraum - bitte lüften.
+            Waschkeller - bitte lüften.
           {% endif %}
         value_template: >-
           {{states.sensor.temp_1.state}}°C / {{states.sensor.hum_1.state}}%
@@ -83,12 +119,12 @@ sensor:
           mdi:window-open
   - platform: template
     sensors:
-      waschkeller:
+      heizraum:
         friendly_name_template: >-
           {% if states.sensor.hum_3.state | int < 75 %}
-            Waschkeller - alles gut.
+            Heizraum - alles gut.
           {% else %}
-            Waschkeller - bitte lüften.
+            Heizraum - bitte lüften.
           {% endif %}
         value_template: >-
           {{states.sensor.temp_3.state}}°C / {{states.sensor.hum_3.state}}%
@@ -109,8 +145,8 @@ sensor:
           mdi:window-open
 
 automation:
-  - id: heizraum_alarm
-    alias: 'Heizraum Alarm'
+  - id: waschkeller_alarm
+    alias: 'Waschkeller Alarm'
     trigger:
       platform: numeric_state
       entity_id: sensor.hum_1
@@ -118,7 +154,7 @@ automation:
     action:
       service: notify.mobile_app_sm_a405fn
       data:
-        title: 'Heizraum'
+        title: 'Waschkeller'
         message: 'Achtung: Rel Luftfeuchte über 75%'
   - id: wohnzimmer_alarm
     alias: 'Wohnzimmer Alarm'
@@ -131,8 +167,8 @@ automation:
       data:
         title: 'Wohnzimmer'
         message: 'Achtung: Rel Luftfeuchte über 75%'
-  - id: waschkeller_alarm
-    alias: 'Waschkeller Alarm'
+  - id: heizraum_alarm
+    alias: 'Heizraum Alarm'
     trigger:
       platform: numeric_state
       entity_id: sensor.hum_3
@@ -140,7 +176,7 @@ automation:
     action:
       service: notify.mobile_app_sm_a405fn
       data:
-        title: 'Waschkeller'
+        title: 'Heizraum'
         message: 'Achtung: Rel Luftfeuchte über 75%'
   - id: bad_alarm
     alias: 'Bad Alarm'
