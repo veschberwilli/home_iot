@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  app:
+    image: portainer/portainer-ce:linux-arm
+    container_name: portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    ports:
+      - 9000:9000
+    restart: always
