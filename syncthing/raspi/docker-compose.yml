@@ -1,0 +1,18 @@
+version: "2.1"
+services:
+  syncthing:
+    image: ghcr.io/linuxserver/syncthing
+    container_name: syncthing
+    hostname: minks syncthing
+    environment:
+      - PUID=1001
+      - PGID=100
+      - TZ=Europe/London
+    volumes:
+      - /home/pi/syncthing/config:/config
+      - /home/pi/syncthing/sync:/data1
+    ports:
+      - 8384:8384
+      - 22000:22000
+      - 21027:21027/udp
+    restart: always
