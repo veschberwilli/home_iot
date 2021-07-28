@@ -124,7 +124,7 @@ class SortData:
 
                     else:
                         # if create_date is not found then cp file to unknown_date folder
-                        os.system('mv -n %s %s' % (str(file_path), self.path_unknown_date))
+                        os.system('cp -n %s %s' % (str(file_path), self.path_unknown_date))
                         logging.error('No Date Info Found -> %s' % file_path)
                         continue
 
@@ -149,14 +149,14 @@ class SortData:
                     # move to daily folder
                     # if its a pic
                     if file_type in self.pic_file_type:
-                        os.system('mv -n %s %s' % (file_path, folder_day))
+                        os.system('cp -n %s %s' % (file_path, folder_day))
                     # if its a vid (create vid dir if not exist)
                     elif file_type in self.vid_file_type:
                         folder_day = os.path.join(folder_day, 'vid')
                         os.system('mkdir -p %s' % (folder_day))
-                        os.system('mv -n %s %s' % (file_path, folder_day))
+                        os.system('cp -n %s %s' % (file_path, folder_day))
 
-                    logging.info('moved %s --> %s, create date: %s' % (file_path, folder_day, create_date_obj.get_date_string()))
+                    logging.info('copied %s --> %s, create date: %s' % (file_path, folder_day, create_date_obj.get_date_string()))
 
                 else:
                     logging.error('File Not Supported -> %s' % file)

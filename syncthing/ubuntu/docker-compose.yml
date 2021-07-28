@@ -8,9 +8,9 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ./syncthing:/var/syncthing
+      - /home/egon/syncthing:/var/syncthing
     ports:
       - 8384:8384
       - 22000:22000/tcp
       - 22000:22000/udp
-    restart: unless-stopped
+    restart: always
