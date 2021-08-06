@@ -52,8 +52,8 @@ int main(int argc, char *argv[]) {
     po::variables_map vm = getProgramOptions(argc, argv);
 
     // print params
-    cout << "Name:" << vm["name"].as<string>() << endl;
-    cout << "Dir:" << vm["dir"].as<string>() << endl;
+    cout << "Name: " << vm["name"].as<string>() << endl;
+    cout << "Dir: " << vm["dir"].as<string>() << endl;
 
     // loop over files and extract exif info and store in array
     fs::path p = vm["dir"].as<string>();
