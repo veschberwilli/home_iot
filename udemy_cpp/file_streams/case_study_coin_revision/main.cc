@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <string>
+#include <fstream>
 #include "coin.h"
 
 int check_input() {
@@ -11,6 +14,37 @@ int check_input() {
 	return input;
 }
 
+// populate coins function
+std::vector<coin> populate_coins() {
+	std::vector<coin> coins;
+	std::ifstream coin_file("coin.dat");
+	std::string line;
+
+	if (coin_file){
+		while (getline(coin_file, line)){
+			std::istringstream is(line);
+			std::cout << line << std::endl;
+
+			std::string name{""};
+			std::string plural{""};
+			int cents{0};
+
+			is >> name;
+			is >> plural;
+			is >> cents;
+			
+			coin this_coin(name, plural, cents);
+			coins.push_back(this_coin);
+		}
+		coin_file.close();
+	}
+
+	return coins;
+}
+
+
+
+/*
 std::vector<coin> populate_coins() {
 	std::vector<coin> coins;
 	coin dollar{ "dollar", "dollars", 100 };                 // Create dollar instance
@@ -27,6 +61,8 @@ std::vector<coin> populate_coins() {
 	coins.push_back(penny);
 	return coins;
 }
+*/
+
 
 int main() {
 	std::vector<coin> coins;
