@@ -1,3 +1,0 @@
-0 0 * * * python3 /usr/src/app/sort_data.py >> /usr/src/app/cron.log 2>&1
-
-
