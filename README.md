@@ -4,6 +4,9 @@ I am using
 - A raspberry pi 4 to deploy the Docker stuff and run the scripts,
 - Use several [ESP8266](https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/readme.html) to flash the software on
 
+This [sketch](./DockerStack.drawio) is drawn with the help of [App.Diagrams](https://app.diagrams.net/) \
+![docker stack](./img/high_level_docker_stack.png)
+
 # Arduino Sketches
 Wifi settings: energy safe mode off, reconnect to wifi after interupt, static ip
 
