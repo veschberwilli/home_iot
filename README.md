@@ -1,4 +1,12 @@
+# Overview
+This repo is a collection of IoT related stuff that is basically done entirely in my private time and just for fun.
+I am using
+- A raspberry pi 4 to deploy the Docker stuff and run the scripts,
+- Use several [ESP8266](https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/readme.html) to flash the software on
+
 # Arduino Sketches
+Wifi settings: energy safe mode off, reconnect to wifi after interupt, static ip
+
 ## Temperature and Humidity Sensors
 code written in Arduino C
 
@@ -24,10 +32,12 @@ preparations:
 - deploy via docker-compose
 - deploy docker with datarchiver tool inside Jenkins docker
 
-# Data-Archiver
+# Home Assisstant
+Link to [Home Assisstant](https://www.home-assistant.io/) \
+This runs in combination with the MQTT Broker [Eclipse Mosquitto](https://mosquitto.org/)
 
-
-# home_iot
+Just some hints:
+- installtion on a raspi [link](https://www.home-assistant.io/docs/installation/raspberry-pi/)
 - deploy via docker-compose
 - start server under: http://ipaddress:8123
 - copy configuration file (incl. sensor and alarm settings) to config folder
@@ -36,18 +46,23 @@ preparations:
 # Portainer
 - docker volume create portainer_data
 - docker run -d -p 9000:9000 -p 8000:8000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
-- https://portainer.readthedocs.io/en/latest/deployment.html
-
-## Links
-- https://www.home-assistant.io/docs/installation/raspberry-pi/
-- install docker on raspi: xxx
-- install docker-compose on raspi: xxx
-- Wifi settings: energy safe mode off, reconnect to wifi after interupt, static ip
-
-## ROS
-- stuff from udemy course
+- [Useful Link to Deploy](https://portainer.readthedocs.io/en/latest/deployment.html)
 
 ## my_piprojects
 - misc stuff like 
     - led blinking, when led connected to raspi 
-    - tones, when loudespeaker connected to raspi 
+    - tones, when loudespeaker connected to raspi
+
+## Syncthing
+This tool is used to sync the stuff on our mobile phones to the central server for backup reasons.
+The (link)[https://syncthing.net/] to the project.
+Note: there is also a syncthing app for Android which works quite well in combination with the syncthing 
+on the server deployed via Docker.
+
+## Nextcloud
+hat nicht funktioniert. Warum auch immer kam immer die Meldung nach der Anmeldung (wenn mit postgres initialisiert):
+
+"Interner Serverfehler" - Der Server konnte die Anfrage nicht fertig stellen ...
+
+## License
+[MIT](./LICENSE) 
