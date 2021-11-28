@@ -1,0 +1,20 @@
+version: '3'
+services:
+  home-assisstant:
+    image: homeassistant/raspberrypi3-homeassistant:stable
+    restart: always
+    volumes:
+      - ./home_assisstant:/config
+    network_mode: host
+    environment:
+      TZ: 'Europe/Berlin'
+  mqtt-broker:
+    image: eclipse-mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./mosquitto/log:/mosquitto/log
+      - ./mosquitto/config:/mosquitto/config/mosquitto.config
+      - ./mosquitto/data:/mosquitto/data
