@@ -45,6 +45,7 @@ Just some hints:
 - start server under: http://ipaddress:8123
 - copy configuration file (incl. sensor and alarm settings) to config folder
 - copy lovelace gui raw code into home assistant gui
+- user: admin, pw: admin
 
 # Portainer
 - docker volume create portainer_data
