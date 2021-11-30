@@ -62,36 +62,26 @@ views:
       - type: button
         tap_action:
           action: toggle
-        entity: switch.tp_link_smart_plug_8f08
-        name: Leuchtkiste
+        entity: switch.wasserkocher
+        name: Wasserkocher
         show_state: true
-        icon: 'hass:lightbulb'
+        icon: mdi:thought-bubble-outline
   - title: Stromverbrauch
     path: bilder
     badges: []
     cards:
-      - type: gauge
-        entity: sensor.waschmaschine_power_w
-        min: 0
-        name: Aktueller Vebrauch
-        unit: Watt
-        max: 100
+      - type: entities
+        entities:
+          - entity: sensor.current_consumption
+            name: Verbrauch Aktuell
+          - entity: sensor.today_s_consumption
+            name: Verbrauch Heute
+          - entity: sensor.total_consumption
+            name: Verbrauch Total
+        state_color: false
+        title: Verbrauch Waschmaschine+Trockner
       - type: history-graph
         entities:
           - entity: sensor.waschmaschine_today_kwh
-          - entity: sensor.waschmaschine_total_kwh
         hours_to_show: 24
         refresh_interval: 0
-        title: Verbrauch
-      - type: history-graph
-        entities:
-          - entity: sensor.waschmaschine_amps
-        hours_to_show: 24
-        refresh_interval: 0
-        title: Strom
-      - type: history-graph
-        entities:
-          - entity: sensor.waschmaschine_volts
-        hours_to_show: 24
-        refresh_interval: 0
-        title: Spannung
