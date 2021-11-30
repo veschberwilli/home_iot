@@ -67,5 +67,12 @@ hat nicht funktioniert. Warum auch immer kam immer die Meldung nach der Anmeldun
 
 "Interner Serverfehler" - Der Server konnte die Anfrage nicht fertig stellen ...
 
+## Misc
+### Install Docker and Docker Compose
+https://docs.docker.com/engine/install/ubuntu/
+https://docs.docker.com/compose/install/
+
+### Assign Static IP Adress
+done via Dedicated Rule in the Router Settings
 ## License
 [MIT](./LICENSE) 
