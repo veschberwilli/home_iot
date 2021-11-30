@@ -75,5 +75,9 @@ hat nicht funktioniert. Warum auch immer kam immer die Meldung nach der Anmeldun
 
 ### Assign Static IP Adress
 done via Dedicated Rule in the Router Settings
+
+### add ssh key to github
+[link](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
 ## License
 [MIT](./LICENSE) 
