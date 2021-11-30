@@ -58,7 +58,7 @@ Just some hints:
 
 ## Syncthing
 This tool is used to sync the stuff on our mobile phones to the central server for backup reasons.
-The (link)[https://syncthing.net/] to the project.
+The [link](https://syncthing.net/) to the project.
 Note: there is also a syncthing app for Android which works quite well in combination with the syncthing 
 on the server deployed via Docker.
 
@@ -69,8 +69,8 @@ hat nicht funktioniert. Warum auch immer kam immer die Meldung nach der Anmeldun
 
 ## Misc
 ### Install Docker and Docker Compose
-(docker engine)[https://docs.docker.com/engine/install/ubuntu/]
-(docker compose)[https://docs.docker.com/compose/install/]
+[docker engine](https://docs.docker.com/engine/install/ubuntu/)
+[docker compose](https://docs.docker.com/compose/install/)
 
 ### Assign Static IP Adress
 done via Dedicated Rule in the Router Settings
