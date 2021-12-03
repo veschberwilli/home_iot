@@ -82,6 +82,7 @@ views:
         title: Verbrauch Waschmaschine+Trockner
       - type: history-graph
         entities:
-          - entity: sensor.waschmaschine_today_kwh
+          - entity: sensor.today_s_consumption
         hours_to_show: 24
         refresh_interval: 0
+
